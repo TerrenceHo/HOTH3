@@ -1,0 +1,45 @@
+{
+  "session": {
+    "new": true,
+    "sessionId": "SessionId.33bdf45c-7510-454b-8463-26cc15255c40",
+    "application": {
+      "applicationId": "amzn1.ask.skill.c6722ba1-157a-4183-af5d-b9e4fc3d61d4"
+    },
+    "attributes": {},
+    "user": {
+      "userId": "amzn1.ask.account.AFCOOIUCMIXXRTLGVJEDZUOW5ZLO57S6KKQU6VDBEF6DWDNMOCFL4Z3VFAWQM7O7JHFKSBHB5OFDQQJXZV6WRYXPSLSBQZCO2FJSAPSDOLLUNZXC4FPP45M2TL7KG6LQ2GLOUDCHHAXSO6PS6AWDCMEN6V4P6ITGM3I5IOPZVURJUQHC5SAML3HCZYBWZQQ7XXJPF2YZ6SKRB7A"
+    }
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "EdwRequestId.ae3c4a2d-0f22-4f62-bd48-6f4c505167a0",
+    "intent": {
+      "name": "FindRecipeIntent",
+      "slots": {
+        "item": {
+          "name": "item",
+          "value": "pizza"
+        }
+      }
+    },
+    "locale": "en-US",
+    "timestamp": "2017-11-12T22:20:10Z"
+  },
+  "context": {
+    "AudioPlayer": {
+      "playerActivity": "IDLE"
+    },
+    "System": {
+      "application": {
+        "applicationId": "amzn1.ask.skill.c6722ba1-157a-4183-af5d-b9e4fc3d61d4"
+      },
+      "user": {
+        "userId": "amzn1.ask.account.AFCOOIUCMIXXRTLGVJEDZUOW5ZLO57S6KKQU6VDBEF6DWDNMOCFL4Z3VFAWQM7O7JHFKSBHB5OFDQQJXZV6WRYXPSLSBQZCO2FJSAPSDOLLUNZXC4FPP45M2TL7KG6LQ2GLOUDCHHAXSO6PS6AWDCMEN6V4P6ITGM3I5IOPZVURJUQHC5SAML3HCZYBWZQQ7XXJPF2YZ6SKRB7A"
+      },
+      "device": {
+        "supportedInterfaces": {}
+      }
+    }
+  },
+  "version": "1.0"
+}

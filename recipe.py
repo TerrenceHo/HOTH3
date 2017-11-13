@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 base_url = "http://forkthecookbook.com"
 search_base_url = "http://forkthecookbook.com/search-recipes"
-specific_url = "http://www.forkthecookbook.com/recipes/braised-chicken-tomatoes-potatoes-peas-1bafa"
+specific_url = "http://www.forkthecookbook.com/recipes/chicago-pizza-burgers-eac03"
 
 def get_recipe_names(search_term):
     names_list = []
@@ -43,20 +43,17 @@ def get_data(specific_url):
     for i in range(len(ingredients_list)):
         ingredients_list[i] = " ".join(ingredients_list[i].get_text().strip().split())
     
-    instructions_list = soup.find_all("td", class_="recipe-instructions")
+    instructions_list = soup.find("td", class_="recipe-instructions").find_all("li")
     for i in range(len(instructions_list)):
-        instructions_list[i] = " ".join(instructions_list[i].get_text().strip().split())
+        instructions_list[i] = " ".join(instructions_list[i].get_text().strip().split())    #size of 1
 
     return ingredients_list, instructions_list
-
-#need instructions
 
 if __name__ == "__main__":
     #links_list = get_recipe_URLs("chicken")
     #print(links_list)
     #names_list = get_recipe_names("chicken")
     #print(names_list)
-    ingredients_list = get_data("http://www.forkthecookbook.com/recipes/braised-chicken-tomatoes-potatoes-peas-1bafa")
-    print(ingredients_list)
-    #get_single_recipe_name(specific_url)
+    ingredients_list, instructions_list = get_data(specific_url)
 
+    print(ingredients_list)
