@@ -47,7 +47,6 @@ def get_data(specific_url):
     for i in range(len(instructions_list)):
         instructions_list[i] = " ".join(instructions_list[i].get_text().strip().split())    #size of 1
 
-
     return (ingredients_list, instructions_list)
 
 if __name__ == "__main__":
@@ -57,6 +56,7 @@ if __name__ == "__main__":
     #print(names_list)
     ingredients_list, instructions_list = get_data(specific_url)
 
+    print(ingredients_list)
     print(instructions_list)
-
+    #get_single_recipie_name(specific_url)
     #get_single_recipie_name(specific_url)
