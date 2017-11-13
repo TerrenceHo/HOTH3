@@ -1,18 +1,19 @@
 import requests
 from bs4 import BeautifulSoup
 
-base_url_edam = "https://api.edamam.com/search"
-app_id = "9c45eaed"
-app_key = "3af8be29d3ed887b660c9130fa78bf96"
+base_url = "http://forkthecookbook.com"
+search_base_url = "http://forkthecookbook.com/search-recipes"
 
-def requestEdam(search_term):
-    search_term = str(search_term)
-    request_str = ("https://api.edamam.com/search?" + "app_id=" + app_id +
-        "&app_key=" + app_key + "&q=" + search_term + "&from=0&to=1")
-    print(request_str)
-    r = requests.get(request_str)
-    recipe_json = r.json()
-    print(recipe_json["hits"][0]["recipe"]["url"])
+def get_recipe_URLs(search_term):
+    links_list = []
+    r = requests.get(search_base_url + "?q=" + search_term)
+    soup = BeautifulSoup(r.text, "html.parser")
+    soup = soup.find_all("a", {"class":"gallery-link"}, href=True)
+    for i in range(len(soup)):
+        links_list.append(soup[i]['href'])
+    return links_list
+
 
 if __name__ == "__main__":
-    requestEdam("chicken")
+    links_list = get_recipe_URLs("chicken")
+    print(links_list)
