@@ -14,7 +14,7 @@ def get_recipe_names(search_term):
         names_list.append(soup[i].find("h2", {"class":"recipe-title"}).get_text())  
     return names_list
 
-def get_single_recipie_name(specific_url):
+def get_single_recipe_name(specific_url):
     name = ""
     r = requests.get(specific_url)
     soup = BeautifulSoup(r.text, "html.parser")
@@ -47,7 +47,7 @@ def get_data(specific_url):
     for i in range(len(instructions_list)):
         instructions_list[i] = " ".join(instructions_list[i].get_text().strip().split())
 
-    return (ingredients_list, instructions_list)
+    return ingredients_list, instructions_list
 
 #need instructions
 
@@ -58,5 +58,5 @@ if __name__ == "__main__":
     #print(names_list)
     ingredients_list = get_data("http://www.forkthecookbook.com/recipes/braised-chicken-tomatoes-potatoes-peas-1bafa")
     print(ingredients_list)
-    #get_single_recipie_name(specific_url)
+    #get_single_recipe_name(specific_url)
 
