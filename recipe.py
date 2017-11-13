@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 base_url = "http://forkthecookbook.com"
 search_base_url = "http://forkthecookbook.com/search-recipes"
-url = "http://www.forkthecookbook.com/recipes/braised-chicken-tomatoes-potatoes-peas-1bafa"
+specific_url = "http://www.forkthecookbook.com/recipes/braised-chicken-tomatoes-potatoes-peas-1bafa"
 
 def get_recipe_names(search_term):
     names_list = []
@@ -14,6 +14,16 @@ def get_recipe_names(search_term):
         names_list.append(soup[i].find("h2", {"class":"recipe-title"}).get_text())  
     return names_list
 
+def get_single_recipie_name(specific_url):
+    name = ""
+    r = requests.get(specific_url)
+    soup = BeautifulSoup(r.text, "html.parser")
+    name = soup.find("title").get_text()
+
+    name=name.split("|")[0]
+    print (name)
+    return name
+
 def get_recipe_URLs(search_term):
     links_list = []
     r = requests.get(search_base_url + "?q=" + search_term)
@@ -23,24 +33,23 @@ def get_recipe_URLs(search_term):
         links_list.append(base_url+soup[i]['href'])
     return links_list
 
-def get_recipe_ingredients(url):
+def get_recipe_ingredients(specific_url):
     ingredients_list = []
-    r = requests.get(url)
+    r = requests.get(specific_url)
     soup = BeautifulSoup(r.text, "html.parser")
-    soup = soup.find_all({"class":"recipe-ingredients"}, href=True)
-    for i in range(len(soup)):
-        ingredients_list.append(soup[i].find("td", {"class":"recipe-ingredients"}).get(text))
+    ingredients_list = soup.find_all("td", class_="recipe-ingredients")
+    for i in range(len(ingredients_list)):
+        ingredients_list[i] = " ".join(ingredients_list[i].get_text().strip().split())
     return ingredients_list
 
-def get_recipe_instructions(url)
-
-
+#need instructions
 
 if __name__ == "__main__":
-    links_list = get_recipe_URLs("chicken")
-    print(links_list)
-    names_list = get_recipe_names("chicken")
-    print(names_list)
-    #ingredients_list = get_recipe_ingredients("chicken")
-    #print(ingredients_list)
+    #links_list = get_recipe_URLs("chicken")
+    #print(links_list)
+    #names_list = get_recipe_names("chicken")
+    #print(names_list)
+    ingredients_list = get_recipe_ingredients("http://www.forkthecookbook.com/recipes/braised-chicken-tomatoes-potatoes-peas-1bafa")
+    print(ingredients_list)
+    #get_single_recipie_name(specific_url)
 
