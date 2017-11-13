@@ -33,23 +33,21 @@ def get_recipe_URLs(search_term):
         links_list.append(base_url+soup[i]['href'])
     return links_list
 
-def get_recipe_ingredients(specific_url):
+def get_data(specific_url):
     ingredients_list = []
-    r = requests.get(specific_url)
-    soup = BeautifulSoup(r.text, "html.parser")
-    ingredients_list = soup.find_all("td", class_="recipe-ingredients")
-    for i in range(len(ingredients_list)):
-        ingredients_list[i] = " ".join(ingredients_list[i].get_text().strip().split())
-    return ingredients_list
-
-def get_recipe_instructions(specific_url):
     instructions_list = []
     r = requests.get(specific_url)
     soup = BeautifulSoup(r.text, "html.parser")
+
+    ingredients_list = soup.find_all("td", class_="recipe-ingredients")
+    for i in range(len(ingredients_list)):
+        ingredients_list[i] = " ".join(ingredients_list[i].get_text().strip().split())
+    
     instructions_list = soup.find_all("td", class_="recipe-instructions")
     for i in range(len(instructions_list)):
         instructions_list[i] = " ".join(instructions_list[i].get_text().strip().split())
-    return instructions_list
+
+    return (ingredients_list, instructions_list)
 
 #need instructions
 
@@ -58,7 +56,7 @@ if __name__ == "__main__":
     #print(links_list)
     #names_list = get_recipe_names("chicken")
     #print(names_list)
-    ingredients_list = get_recipe_ingredients("http://www.forkthecookbook.com/recipes/braised-chicken-tomatoes-potatoes-peas-1bafa")
+    ingredients_list = get_data("http://www.forkthecookbook.com/recipes/braised-chicken-tomatoes-potatoes-peas-1bafa")
     print(ingredients_list)
     #get_single_recipie_name(specific_url)
 
